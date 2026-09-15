@@ -257,7 +257,7 @@
   /* Навигация */
 
   function goToStep(n) {
-    state.step = Math.min(Math.max(n, 1), REVIEW_STEP);
+    state.step = Math.min(Math.max(n, 1), SUCCESS_STEP);
     state.draftRestored = false;
     if (state.step === REVIEW_STEP) {
       renderSummary();
