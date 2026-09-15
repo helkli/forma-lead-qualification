@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FORMA — анкета первичной квалификации</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <noscript>
+    <p class="noscript">Для работы анкеты включите JavaScript.</p>
+  </noscript>
+
+  <header class="header">
+    <div class="page">
+      <div class="logo">FORMA</div>
+      <p class="header__subtitle">Анкета первичной квалификации</p>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="progress" id="progress">
+      <div class="progress__track">
+        <div class="progress__bar" id="progress-bar" role="progressbar"
+             aria-label="Прогресс заполнения анкеты" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1"></div>
+      </div>
+      <p class="progress__label" id="progress-label" aria-live="polite">Шаг 1 из 4</p>
+    </div>
+
+    <!-- S4: восстановленный черновик (FR-11) -->
+    <div class="notice" id="restore-banner" hidden>
+      <span>Мы восстановили ваши ответы с прошлого раза.</span>
+      <button type="button" class="linklike" id="restart-btn">Начать заново</button>
+    </div>
+
+    <!-- R2: хранилище недоступно -->
+    <p class="hint" id="storage-warning" hidden>Черновик не будет сохранен.</p>
+
+    <form id="anketa-form" novalidate>
+      <section class="screen" id="screen-step-1" data-step="1">
+        <div class="card">
+          <h2 class="screen-title" tabindex="-1">Контакты</h2>
+          <div class="fields" data-fields-for="1"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-step-2" data-step="2" hidden>
+        <div class="card">
+          <h2 class="screen-title" tabindex="-1">Объект</h2>
+          <div class="fields" data-fields-for="2"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-step-3" data-step="3" hidden>
+        <div class="card">
+          <h2 class="screen-title" tabindex="-1">Задача</h2>
+          <div class="fields" data-fields-for="3"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-step-4" data-step="4" hidden>
+        <div class="card">
+          <h2 class="screen-title" tabindex="-1">Детали</h2>
+          <div class="fields" data-fields-for="4"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-review" data-step="5" hidden>
+        <div class="card">
+          <h2 class="screen-title" tabindex="-1">Проверьте ответы</h2>
+          <div id="review-summary"></div>
+
+          <div class="field checkbox-field">
+            <input type="checkbox" id="confirmed-input">
+            <label for="confirmed-input">Я проверил(а) ответы и подтверждаю их корректность</label>
+          </div>
+
+          <button type="button" class="btn btn--primary" id="submit-btn" disabled>Отправить</button>
+          <p class="hint" id="submit-hint">Кнопка отправки станет доступна после подтверждения.</p>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-success" data-step="6" hidden>
+        <!-- S6: клиентская часть — нейтральный текст без статуса (FR-08, BR-04b) -->
+        <div class="card">
+          <h2 class="screen-title" tabindex="-1">Спасибо!</h2>
+          <p class="success-message">Мы получили ваши ответы. Менеджер свяжется с вами в ближайшее время.</p>
+          <button type="button" class="btn btn--ghost new-app-btn" id="new-app-btn">Заполнить новую заявку</button>
+        </div>
+
+        <!-- S7: менеджерская часть — карточка со статусом и причинами (FR-09) -->
+        <div class="card manager-card">
+          <h2 class="manager-title">Для менеджера</h2>
+          <pre class="card-text" id="success-card-pre"></pre>
+          <textarea class="control card-textarea" id="fallback-textarea" rows="14" hidden
+                    aria-label="Текст карточки заявки для ручного копирования"></textarea>
+          <p class="hint" id="copy-hint" hidden>Автоматическое копирование недоступно. Выделите текст и скопируйте вручную (Ctrl+C / Cmd+C).</p>
+          <button type="button" class="btn btn--primary" id="copy-btn">Копировать карточку</button>
+        </div>
+      </section>
+
+      <div class="nav">
+        <button type="button" class="btn btn--ghost" id="back-btn" hidden>Назад</button>
+        <button type="button" class="btn btn--primary" id="next-btn">Далее</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/card.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
